@@ -122,16 +122,22 @@ button span {
   padding: 20px;
 }
 
-#description{
+.description{
   position:relative;
-  right: 35%;
-  top: 0.1%;
-  background-image: url("images/Logo.png");
+  right: 45%;
+  top: -10%;
+  background-image: url("assets/resume_paper.png");
   background-repeat: no-repeat;
-  background-position: bottom;
+  background-size: 500px;
   color:black;
   width:500px;
   height: 580px;
+}
+
+.description p{
+  width: 100%;
+  text-align: center;
+  padding-top: 40%;
 }
 
 .login{
