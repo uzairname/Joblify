@@ -8,7 +8,7 @@ body {
 
 .hero {
   background: #260238;
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
   color: #fff;
   position: relative;
@@ -19,7 +19,6 @@ section{
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
   background: #260238;
 
 }
@@ -43,7 +42,7 @@ nav .menu-img {
 }
 
 nav .logo {
-  width: 160px;
+  width: 80px;
   cursor: pointer;
 
 }
@@ -123,37 +122,37 @@ button span {
 }
 
 .description{
-  position:relative;
+  position:absolute;
   right: 45%;
   top: -10%;
   background-image: url("assets/resume_paper.png");
   background-repeat: no-repeat;
-  background-size: 500px;
+  background-size: 650px;
   color:black;
-  width:500px;
-  height: 580px;
+  width:750px;
+  height: 707px;
+  z-index: 2;
 }
 
 .description p{
   width: 100%;
   text-align: center;
-  padding-top: 40%;
+  padding-top: 33%;
 }
 
-.login{
-  float: right;
-  margin-right: 10%;
-  background-color: white;
-  color: black;
+.name{
+  width: 20%;
+  position:absolute;
+  left: 55%;
+  top: 50px;
+  z-index: 1;
 }
-
-.login button{
-  background-color: transparent;
-  border: none;
-  padding: 10px 24px;
-  width: 100%;
-  height: 33.3%;
-  display: block;
-  font-size: 30px;
-  color: #717171;
+.name img{
+  margin-bottom: 0px;
+  padding-bottom: 0px;
+  width:200px;
+}
+.name h2{
+  position: absolute;
+  top: 10%;
 }
