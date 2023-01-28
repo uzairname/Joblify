@@ -19,16 +19,52 @@ section{
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100vh;
+    height: fit-content;
     background: #260238;
 
 }
 .box {
     position: relative;
     background: pink;
-    width: 90vh;
-    height: 60vh;
+    width: 160vh;
+    height: 70vh;
 }
+
+.box-left {
+    position: relative;
+    right: 100px;
+    background: black;
+    width: 50vh;
+    height: 70vh;
+}
+
+.float-container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background: #260238;
+}
+
+.float-child-L {
+    position: center;
+    display: inline-block;
+    width: 50vh;
+    height: 50vh;
+    background:pink;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+}  
+.float-child-R {
+    position: center;
+    display: inline-block;
+    width: 50vh;
+    height: 50vh;
+    background:black;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+}  
 
 nav{
     display: flex;
@@ -110,4 +146,84 @@ button span {
     margin-top: 30px;
     border-radius: 30px;
 
+}
+
+p.title {
+    padding-top: 20px;
+    padding-left: 20px;
+    position: relative;
+    font-size: 65px;
+    font-weight: 100;
+
+}
+
+p.paragraph {
+    font-size: 25px;
+    padding-left: 30px;
+    max-width: 400px;
+    
+}
+
+.sign-up{
+    margin-top: 7%;
+    margin-left: 50%;
+    z-index: 2;
+}
+
+.sign-up a{
+    text-decoration: none;
+    background: #00986f;
+    padding: 10px 40px;
+    display: inline-block;
+    color: #fff;
+    font-size: 18px;
+    margin-top: 30px;
+    border-radius: 30px;
+}
+
+/* Define the rectangle styles */
+.rectangle {
+    width: 150vh;
+    height: 65vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+}
+
+/* Define the black and pink sides of the rectangle */
+.rectangle .black-side {
+    width: 50%;
+    background-color: black;
+}
+
+.rectangle .pink-side {
+    width: 50%;
+    background-color: pink;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Define the button styles */
+.rectangle button {
+    width: 180px;
+    height: 40px;
+    background-color: #ff69b4;
+    border: none;
+    color: white;
+    font-size: 16px;
+}
+
+.rectangle button:hover {
+    background-color: #ff1493;
+}
+
+p.tag {
+    color: #4B4B4B;
+    font-size: 18px;
+    padding-left: 30px;
+    max-width: 400px;
+    padding-right: 20px;
 }
