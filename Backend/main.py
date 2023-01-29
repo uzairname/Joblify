@@ -8,6 +8,8 @@ import database.models as models
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
+from analyzer import calculate_similarity
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -29,17 +31,16 @@ def upload():
 
 
 
-
 @app.route('/api/resume', methods=['POST'])
 # @cross_origin(supports_credentials=True)
-def upload_file():
+def upload_resume():
     print("uploaded")
 
     data = request.form
     print("resume data", data)
 
-    resume = models.Resume(content=data, user=user)
-    resume.save()
+    # resume = models.Resume(content=data, user=user)
+    # resume.save()
 
     print(data)
     return 1
@@ -48,29 +49,81 @@ def upload_file():
 
 @app.route('/api/job-posting', methods=['POST'])
 # @cross_origin(supports_credentials=True)
-def upload_file():
+def upload_posting():
     print("uploaded")
 
-    data = request.form
-    print("job data", data)
+    # job_posting = models.JobPosting(description="I work", user=user)
+    # job_posting.save()
 
-    job_posting = models.JobPosting(description=data, user=user)
-    job_posting.save()
-
-    print(data)
+    # print(data)
     return 1
 
 
-@app.route('/api/matches', methods=['GET'])
+@app.route('/api/matches-resume', methods=['GET'])
 # @cross_origin(supports_credentials=True)
-def get_matches():
-    print("getting matches")
+def get_matches_resume():
 
-    job_posting = models.JobPosting.objects.get(id=job_posting_id)
-    job_posting = models.JobPosting.objects.get(id=job_posting_id)
+    # get the user
+    username = "Business Intelligence Developer"
 
-    matches = models.Resume.objects(user=job_posting.user)
-    return matches
+    user = models.User.objects.get(name=username)
+
+    try:
+        resume = models.Resume.objects.get(user=username)
+    except models.me.DoesNotExist:
+        return "No document found", 404
+
+    # get the content
+    content = resume.content
+
+    # Get all the job postings
+    job_postings = models.JobPosting.objects()
+
+    match_scores_dict = {}
+
+    for posting in job_postings:
+        match_scores_dict[posting.user.name] = calculate_similarity(content, posting.description)
+
+    match_scores = pd.DataFrame(columns=["job_posting", "score"], data=match_scores_dict.items())
+    # sort by score
+    match_scores = match_scores.sort_values(by="score", ascending=False)
+
+    return match_scores.to_json(orient="records")
+
+
+
+
+@app.route('/api/matches-job-posting', methods=['GET'])
+# @cross_origin(supports_credentials=True)
+def get_matches_job_posting():
+
+        # get the user
+        username = "Business Intelligence Developer"
+
+        user = models.User.objects.get(name=username)
+
+        try:
+            job_posting = models.JobPosting.objects.get(user=username)
+        except models.me.DoesNotExist:
+            return "No document found", 404
+
+        # get the content
+        content = job_posting.description
+
+        # Get all the job postings
+        resumes = models.Resume.objects()
+
+        match_scores_dict = {}
+
+        for resume in resumes:
+            match_scores_dict[resume.user.name] = calculate_similarity(content, resume.content)
+
+        match_scores = pd.DataFrame(columns=["resume", "score"], data=match_scores_dict.items())
+        # sort by score
+        match_scores = match_scores.sort_values(by="score", ascending=False)
+
+        return match_scores.to_json(orient="records")
+
 
 
 
@@ -82,16 +135,47 @@ def get_matches():
 #     return 1
 
 
+def get_string(filename):
+    with open(filename, 'r') as file:
+        data = file.read()
+        file.close()
+    return data
+
+
 if __name__ == '__main__':
     db = Database("development")
     db.run_migrations()
 
     models.Resume.drop_collection()
     models.User.drop_collection()
+    models.JobPosting.drop_collection()
 
-    user = models.User(name="guy")
-    user.save()
-    resume = models.Resume(content="resume", user=user)
-    resume.save()
+    student1 = models.User(name="Business Intelligence Developer")
+    student1.save()
+    student2 = models.User(name="Graphic Designer")
+    student2.save()
+    student3 = models.User(name="Senior Account Executive")
+    student3.save()
+
+    resume1 = models.Resume(content=get_string("Backend/sample-data/resume1.txt"), user=student1)
+    resume1.save()
+    resume2 = models.Resume(content=get_string("Backend/sample-data/resume2.txt"), user=student2)
+    resume2.save()
+    resume3 = models.Resume(content=get_string("Backend/sample-data/resume3.txt"), user=student3)
+    resume3.save()
+
+    hirer1 = models.User(name="Data Warehouse Company")
+    hirer1.save()
+    hirer2 = models.User(name="Graphic Designing Company")
+    hirer2.save()
+    hirer3 = models.User(name="Business Company")
+    hirer3.save()
+
+    job1 = models.JobPosting(user=hirer1, description=get_string("Backend/sample-data/job1.txt"))
+    job1.save()
+    job2 = models.JobPosting(user=hirer2, description=get_string("Backend/sample-data/job2.txt"))
+    job2.save()
+    job3 = models.JobPosting(user=hirer3, description=get_string("Backend/sample-data/job3.txt"))
+    job3.save()
 
     app.run(debug=True, port=5001)

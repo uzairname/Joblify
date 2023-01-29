@@ -57,7 +57,8 @@ class Database:
 
 class User(me.Document):
 
-    name = me.StringField(required=True)
+    name = me.StringField(required=True, primary_key=True)
+
     meta = {'collection': 'users'}
 
 
