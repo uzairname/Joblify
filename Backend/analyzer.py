@@ -5,7 +5,7 @@ import srsly
 
 from flask import Flask, render_template
 
-patterns = srsly.read_jsonl("skill_patterns.jsonl")
+patterns = srsly.read_jsonl("Backend/skill_patterns.jsonl")
 
 nlp = English()
 
@@ -45,9 +45,4 @@ def calculate_similarity(resume_str, job_str):
 
     score = calculate_score(resume_keywords, job_keywords)
     return score
-
-
-Flask.render_template('results.html')
-
-
 

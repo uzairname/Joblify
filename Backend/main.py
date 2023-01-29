@@ -43,7 +43,7 @@ def upload_resume():
     # resume.save()
 
     print(data)
-    return 1
+    return "success"
 
 
 
@@ -56,22 +56,30 @@ def upload_posting():
     # job_posting.save()
 
     # print(data)
-    return 1
+    return "success"
 
 
 @app.route('/api/matches-resume', methods=['GET'])
 # @cross_origin(supports_credentials=True)
 def get_matches_resume():
 
+    print("getting matches")
+
+    args = request.args
+
+    username = args.get('username')
+
     # get the user
-    username = "Business Intelligence Developer"
+    print(username)
 
     user = models.User.objects.get(name=username)
 
     try:
-        resume = models.Resume.objects.get(user=username)
+        resume = models.Resume.objects.get(user=user)
     except models.me.DoesNotExist:
         return "No document found", 404
+
+    print(user, user.name)
 
     # get the content
     content = resume.content
@@ -86,11 +94,15 @@ def get_matches_resume():
 
     match_scores = pd.DataFrame(columns=["job_posting", "score"], data=match_scores_dict.items())
     # sort by score
-    match_scores = match_scores.sort_values(by="score", ascending=False)
+    match_scores = match_scores.sort_values(by="score", ascending=False).reset_index(drop=True)
 
-    return match_scores.to_json(orient="records")
+    print(match_scores)
 
+    result = match_scores.to_json(orient="records")
 
+    print(result)
+
+    return result
 
 
 @app.route('/api/matches-job-posting', methods=['GET'])
@@ -125,14 +137,6 @@ def get_matches_job_posting():
         return match_scores.to_json(orient="records")
 
 
-
-
-# @app.route('/api/resume', methods=['GET'])
-# # @cross_origin(supports_credentials=True)
-# def get_test():
-#     print("get request")
-#
-#     return 1
 
 
 def get_string(filename):
