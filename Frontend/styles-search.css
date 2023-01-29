@@ -126,33 +126,29 @@ button span {
 .search-bar {
   overflow: hidden;
   background-color: #e9e9e9;
-
-  /*padding: 6px;*/
   border: none;
-  /*margin-top: 100px;
-  margin-right: 16px;*/
   font-size: 17px;
   position:relative;
-  left:23%;
-  top:50px;
+  left:-31%;
+  top:-20px;
 }
 
 .search-info{
   color:white;
   width:400px;
   position:relative;
-  left: -25%;
-  top: 100px;
+  left: -5%;
+  top: -180px;
   font-size: 30px;
 }
 
 .resume-list{
   background-color:white;
-  width:400px;
-  height:500px;
+  width:600px;
+  height:650px;
   position:relative;
-  left:-25%;
-  top:200px;
+  left:-90px;
+  top:50px;
 }
 /*.search-bar input[type=text] {
   float: right;
