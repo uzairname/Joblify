@@ -37,6 +37,8 @@
     padding: 24px 20px;
     font-size: 20px;
     color: #cac7ff;
+    width:100%;
+    height:30%
 
 }
 
@@ -70,4 +72,73 @@ button:hover {
     color: white;
 }
 
+.hero {
+    background: #260238;
+    height: 100vh;
+    width: 100%;
+    color: #fff;
+    position: relative;
+  
+  }
+  section{
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: #260238;
+  
+  }
+  .box {
+    position: relative;
+    background: pink;
+    width: 90vh;
+    height: 60vh;
+  }
+  
+  nav{
+    display: flex;
+    align-items: center;
+    padding: 20px 8%;
+    background: #16191E;
+    
+  }
+  
+  nav .menu-img {
+    width: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+  }
+  
+  nav .logo {
+    width: 40px;
+    cursor: pointer;
+  
+  }
+  
+  nav ul{
+    flex: 1;
+    text-align: right;
+  
+  }
+  
+  nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 0 20px;
+  }
+  
+  nav ul li a{
+    text-decoration: none;
+    color: white;
+  }
+  
+  button{
+    background: #efefef;
+    height: 40px;
+    width: 400px;
+    border-radius: 20px;
+    border: 0;
+    outline: 0;
+    cursor: pointer;
+  }
 

@@ -14,14 +14,37 @@
             <input id="stroke" name='stroke' type="color">
             <label for="lineWidth">Line Width</label>
             <input id="lineWidth" name='lineWidth' type="number" value="5">
+            <button id="cam1Btn">Cam 1</button>
+            <button id="cam2Btn">Cam 2</button>
             <button id="clear">Clear</button>
         </div>
         <div class="drawing-board">
-            <canvas id="drawing-board"></canvas>
+            <canvas id="drawing-board-board"></canvas>
+            <div class="camera" id="cam1"></div>
+            <div class="camera" id="cam2"></div>
         </div>
     </section>
     <script>
-        const canvas = document.getElementById('drawing-board');
+
+cam1Btn.addEventListener('click',e => {
+    var x = document.getElementById("cam1");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+            x.style.display = "none";
+            }
+});
+
+cam2Btn.addEventListener('click',e => {
+    var x = document.getElementById("cam2");
+            if (x.style.display === "none") {
+                x.style.display = "block";
+            } else {
+            x.style.display = "none";
+            }
+});
+
+        const canvas = document.getElementById('drawing-board-board');
 const toolbar = document.getElementById('toolbar');
 const ctx = canvas.getContext('2d');
 
