@@ -27,7 +27,7 @@ form {
     left: 50%;
     transform: translate(-50%, -50%);
     display: flex;
-    background: #EB46B4;
+    background: rgb(131, 94, 255);
 }
 
 .drag-drop-image {
