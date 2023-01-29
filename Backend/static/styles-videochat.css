@@ -46,14 +46,17 @@ h1 {
 }
 
 #toolbar button {
-    position: relative;
     background-color: #EB46B4
     ;
     border: none;
     border-radius: 1px;
     color:white;
     padding: 2px;
-    top: 80%;
+}
+
+#clear{
+    position: relative;
+    top: 70%;
 }
 
 #toolbar img{
@@ -62,6 +65,28 @@ h1 {
     width: 40px;
 }
 
-#drawing-board {
+.camera{
+    background-color:black;
+    width:225px;
+    height: 150px;
+    z-index: 100;
+}
+
+#cam1{
+    position: relative;
+    top: 10%;
+    left:5%;
+}
+
+#cam2{
+    position: relative;
+    top: 40%;
+    left:5%;
+}
+
+#drawing-board-board {
     background-color: rgb(37, 37, 37);
+    position: relative;
+    top:-38%;
+    z-index:99;
 }
