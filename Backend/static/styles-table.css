@@ -14,11 +14,58 @@ body {
     justify-content: center;
     align-items: center;
 }
+.hero {
+    background: #260238;
+    min-height: 100vh;
+    width: 100%;
+    color: #fff;
+    position: absolute;
+    /* transition: (-50%,-50%); */
+}
+
+.hero .nav-bar {
+    color: black;
+}
+nav{
+    display: flex;
+    align-items: center;
+    padding: 20px 8%;
+}
+
+nav .menu-img {
+    width: 25px;
+    margin-right: 20px;
+    cursor: pointer;
+}
+
+nav .logo {
+    width: 40px;
+    cursor: pointer;
+
+}
+
+nav ul{
+    flex: 1;
+    text-align: right;
+
+}
+
+nav ul li{
+    display: inline-block;
+    list-style: none;
+    margin: 0 20px;
+}
+
+nav ul li a{
+    text-decoration: none;
+    color: white;
+}
+
 
 main.table {
-    width: 82vw;
+    width: 100vw;
     height: 90vh;
-    background-color: #fff5;
+    background-color: #260238;
 
     backdrop-filter: blur(7px);
     box-shadow: 0 .4rem .8rem #0005;
@@ -140,23 +187,21 @@ tbody tr:hover {
     text-align: center;
 }
 
-.status.delivered {
+.status.strong{
     background-color: #86e49d;
     color: #006b21;
 }
 
-.status.cancelled {
+.status.week {
     background-color: #d893a3;
     color: #b30021;
 }
 
-.status.pending {
+.status.medium {
     background-color: #ebc474;
 }
 
-.status.shipped {
-    background-color: #6fcaea;
-}
+
 
 
 @media (max-width: 1000px) {
