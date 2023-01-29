@@ -1,8 +1,40 @@
 #pdf-drop-area {
-    border: 2px solid #ccc;
+    border: 2px  #ccc;
     padding: 50px;
     text-align: center;
+    padding-left: 10px;
+    padding-right: 10px;
 }
+#pdf-file-input {
+    cursor: pointer;
+  }
+#pdf-file {
+    display: none;
+}
+form {
+    width: 70%; /* or any other desired width */
+    margin: 0 auto; /* center the form horizontally */
+    transform: scale(0.7); /* adjust the size of the form */
+}
+
+.rectangle {
+    width: 150vh;
+    height: 65vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    background: rgb(131, 94, 255);
+}
+
+.drag-drop-image {
+    width: 200px;
+    height: 200px;
+    background-image: url('assets/upload.png');
+    background-repeat: no-repeat;
+    background-position: center;
+  }
 body {
     margin: 0;
     padding: 0;
@@ -17,6 +49,9 @@ body {
     width: 100%;
     color: #fff;
     position: relative;
+    align-content: center;
+    align-items: center;
+    
 
 }
 section{
@@ -70,7 +105,9 @@ section{
     padding: 1rem 1rem;
     vertical-align: middle;
 }  
-
+.hero .nav-bar {
+    color: black;
+}
 nav{
     display: flex;
     align-items: center;
@@ -233,3 +270,11 @@ p.tag {
     max-width: 400px;
     padding-right: 20px;
 }
+
+.box__dragndrop,
+.box__uploading,
+.box__success,
+.box__error {
+  display: none;
+}
+
