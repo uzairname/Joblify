@@ -80,6 +80,9 @@ function displayPDF() {
         body: pdfFileInput.files[0]
     }).then(r => r.json())
 
+    fetch('http://127.0.0.1:5001/api/matches-resume?username=Graphic%20Designer', {
+        method: 'GET',
+    }).then(r => r.json())
 }
 
     </script>
