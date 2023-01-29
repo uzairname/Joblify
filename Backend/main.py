@@ -1,17 +1,15 @@
 import jinja2
 from flask import Flask, render_template, request
-import pymongo as pm
 import os
-import time
-import mongoengine as me
 
-from flask_cors import CORS, cross_origin
-
-from database.models import *
+from database.models import Database
+import database.models as models
 
 template_dir = os.path.join(os.path.dirname(__file__), 'templates')
 jinja_env = jinja2.Environment(loader=jinja2.FileSystemLoader(template_dir), autoescape=True)
 
+from analyzer import calculate_similarity
+import pandas as pd
 
 app = Flask(__name__)
 
@@ -33,20 +31,100 @@ def upload():
 
 
 
-
 @app.route('/api/resume', methods=['POST'])
 # @cross_origin(supports_credentials=True)
-def upload_file():
+def upload_resume():
     print("uploaded")
 
     data = request.form
     print("resume data", data)
 
-    resume = Resume(content=data, user=user)
-    resume.save()
+    # resume = models.Resume(content=data, user=user)
+    # resume.save()
 
     print(data)
     return 1
+
+
+
+@app.route('/api/job-posting', methods=['POST'])
+# @cross_origin(supports_credentials=True)
+def upload_posting():
+    print("uploaded")
+
+    # job_posting = models.JobPosting(description="I work", user=user)
+    # job_posting.save()
+
+    # print(data)
+    return 1
+
+
+@app.route('/api/matches-resume', methods=['GET'])
+# @cross_origin(supports_credentials=True)
+def get_matches_resume():
+
+    # get the user
+    username = "Business Intelligence Developer"
+
+    user = models.User.objects.get(name=username)
+
+    try:
+        resume = models.Resume.objects.get(user=username)
+    except models.me.DoesNotExist:
+        return "No document found", 404
+
+    # get the content
+    content = resume.content
+
+    # Get all the job postings
+    job_postings = models.JobPosting.objects()
+
+    match_scores_dict = {}
+
+    for posting in job_postings:
+        match_scores_dict[posting.user.name] = calculate_similarity(content, posting.description)
+
+    match_scores = pd.DataFrame(columns=["job_posting", "score"], data=match_scores_dict.items())
+    # sort by score
+    match_scores = match_scores.sort_values(by="score", ascending=False)
+
+    return match_scores.to_json(orient="records")
+
+
+
+
+@app.route('/api/matches-job-posting', methods=['GET'])
+# @cross_origin(supports_credentials=True)
+def get_matches_job_posting():
+
+        # get the user
+        username = "Business Intelligence Developer"
+
+        user = models.User.objects.get(name=username)
+
+        try:
+            job_posting = models.JobPosting.objects.get(user=username)
+        except models.me.DoesNotExist:
+            return "No document found", 404
+
+        # get the content
+        content = job_posting.description
+
+        # Get all the job postings
+        resumes = models.Resume.objects()
+
+        match_scores_dict = {}
+
+        for resume in resumes:
+            match_scores_dict[resume.user.name] = calculate_similarity(content, resume.content)
+
+        match_scores = pd.DataFrame(columns=["resume", "score"], data=match_scores_dict.items())
+        # sort by score
+        match_scores = match_scores.sort_values(by="score", ascending=False)
+
+        return match_scores.to_json(orient="records")
+
+
 
 
 # @app.route('/api/resume', methods=['GET'])
@@ -57,69 +135,47 @@ def upload_file():
 #     return 1
 
 
-
-
-def connect_db(db_name):
-
-    start_time = time.time()
-    uri = os.environ.get('MONGODB_URI')
-    if uri is None:
-        raise RuntimeError("MONGODB_URI not found in environment.")
-
-    me.connect(host=uri, db=db_name)
-    client = pm.MongoClient(os.environ.get('MONGODB_URI'))
-    db = client[db_name]
-
-    print(f"Connected to database \"{db_name}\" in {time.time() - start_time} seconds.")
-    return db
-
-class Database:
-    def __init__(self, db_name):
-        self.db = connect_db(db_name)
-
-    def run_migrations(self):
-        """
-        This is run every time the bot starts.
-        """
-
-        # find the database version
-        try:
-            version = DbSettings.objects.get().database_version
-        except me.DoesNotExist:
-            setting = DbSettings(database_version=1)
-            setting.save()
-            version = 0
-
-        # run migrations
-        if version == 0:
-            self.v1()
-            version = 1
-
-        if version == 1:
-            self.v2()
-            version = 2
-
-        print("Ran migrations.")
-
-    def v1(self):
-        DbSettings.objects.get().update(database_version=1)
-
-    def v2(self):
-        self.db["users"].update_many({}, {"$set": {"name":None}})
-        self.db["resumes"].update_many({}, {"$set": {"user":None}})
-        DbSettings.objects.get().update(database_version=2)
+def get_string(filename):
+    with open(filename, 'r') as file:
+        data = file.read()
+        file.close()
+    return data
 
 
 if __name__ == '__main__':
     db = Database("development")
     db.run_migrations()
 
-    Resume.drop_collection()
-    User.drop_collection()
+    models.Resume.drop_collection()
+    models.User.drop_collection()
+    models.JobPosting.drop_collection()
 
-    user = User(name="guy")
-    user.save()
-    resume = Resume(content="resume", user=user)
-    resume.save()
+    student1 = models.User(name="Business Intelligence Developer")
+    student1.save()
+    student2 = models.User(name="Graphic Designer")
+    student2.save()
+    student3 = models.User(name="Senior Account Executive")
+    student3.save()
+
+    resume1 = models.Resume(content=get_string("Backend/sample-data/resume1.txt"), user=student1)
+    resume1.save()
+    resume2 = models.Resume(content=get_string("Backend/sample-data/resume2.txt"), user=student2)
+    resume2.save()
+    resume3 = models.Resume(content=get_string("Backend/sample-data/resume3.txt"), user=student3)
+    resume3.save()
+
+    hirer1 = models.User(name="Data Warehouse Company")
+    hirer1.save()
+    hirer2 = models.User(name="Graphic Designing Company")
+    hirer2.save()
+    hirer3 = models.User(name="Business Company")
+    hirer3.save()
+
+    job1 = models.JobPosting(user=hirer1, description=get_string("Backend/sample-data/job1.txt"))
+    job1.save()
+    job2 = models.JobPosting(user=hirer2, description=get_string("Backend/sample-data/job2.txt"))
+    job2.save()
+    job3 = models.JobPosting(user=hirer3, description=get_string("Backend/sample-data/job3.txt"))
+    job3.save()
 
     app.run(debug=True, port=5001)
