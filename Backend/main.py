@@ -17,7 +17,21 @@ app = Flask(__name__)
 
 @app.route('/')
 def index():
+    return render_template(jinja_env.get_template("Home.html"))
+
+@app.route('/login.html')
+def login():
+    return render_template(jinja_env.get_template("login.html"))
+
+@app.route('/sign-up.html')
+def sign_up():
+    return render_template(jinja_env.get_template("sign-up.html"))
+
+@app.route('/upload.html')
+def sign_up():
     return render_template(jinja_env.get_template("upload.html"))
+
+
 
 
 @app.route('/api/resume', methods=['POST'])
@@ -26,7 +40,7 @@ def upload_file():
     print("uploaded")
 
     data = request.form
-    print(data)
+    print("resume data", data)
 
     resume = Resume(content=data, user=user)
     resume.save()

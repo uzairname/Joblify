@@ -2,11 +2,9 @@ import mongoengine as me
 
 
 
-
 class User(me.Document):
 
     name = me.StringField(required=True)
-
     meta = {'collection': 'users'}
 
 
@@ -16,6 +14,14 @@ class Resume(me.Document):
     user = me.ReferenceField(User, reverse_delete_rule=me.CASCADE)
 
     meta = {'collection': 'resumes'}
+
+
+class JobListing(me.Document):
+
+    description = me.StringField(required=True)
+    user = me.ReferenceField(User, reverse_delete_rule=me.CASCADE)
+
+    meta = {'collection': 'job_listings'}
 
 
 
