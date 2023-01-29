@@ -129,7 +129,7 @@ button span {
   border: none;
   font-size: 17px;
   position:relative;
-  left:-31%;
+  left:-18%;
   top:-20px;
 }
 
@@ -137,7 +137,7 @@ button span {
   color:white;
   width:400px;
   position:relative;
-  left: -5%;
+  left: 8%;
   top: -180px;
   font-size: 30px;
 }
@@ -149,6 +149,16 @@ button span {
   position:relative;
   left:-90px;
   top:50px;
+}
+
+.prices-btn{
+  background-color:#3e2a48;
+  width:200px;
+  position:relative;
+  top:150px;
+  left:-32%;
+  font-size:35px;
+  color:white;
 }
 /*.search-bar input[type=text] {
   float: right;
