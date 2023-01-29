@@ -28,7 +28,7 @@ def sign_up():
     return render_template(jinja_env.get_template("sign-up.html"))
 
 @app.route('/upload.html')
-def sign_up():
+def upload():
     return render_template(jinja_env.get_template("upload.html"))
 
 

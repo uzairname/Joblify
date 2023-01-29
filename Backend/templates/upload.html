@@ -13,7 +13,7 @@
                 <a href="Home.html">
                     <img src="../static/assets/logo.png" class="logo">
                 </a>
-                
+
                 <ul>
                     <li><a href="about.html">About Us</a></li>
                     <li><a href="search.html">Search</a></li>
@@ -21,10 +21,10 @@
                     <li><a href="login.html">Login</a></li>
                     <li><a href="sign-up.html">Sign Up</a></li>
                 </ul>
-                
+
             </nav>
         </div>
-       
+
         <div class="rectangle">
             <form>
                 <div id="pdf-drop-area">
@@ -34,14 +34,11 @@
                 </div>
             </form>
         </div>
-
-
-
-        <div id="pdf-display"></div>  
+        <div id="pdf-display"></div>
     </div>
 
-    
-    <div id="pdf-display"></div>
+
+    <div id="pdf-display_"></div>
     <script type="text/javascript">
 
 var pdfDropArea = document.getElementById("pdf-drop-area");
@@ -75,15 +72,16 @@ function displayPDF() {
     pdfDisplay.innerHTML = "<embed src='" + pdfUrl + "' width='100%' height='600px'/>";
 
     console.log("pdfFile: " + pdfFile);
+    console.log(pdfFileInput.files[0]);
 
     fetch('http://127.0.0.1:5001/api/resume', {
         method: 'POST',
         body: pdfFile
     }).then(r => r.json())
-
 }
-
 
     </script>
 </body>
 </html>
+
+
