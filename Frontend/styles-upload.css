@@ -1,3 +1,5 @@
+/*This is the css page for the upload and the results pages*/
+
 #pdf-drop-area {
     border: 2px  #ccc;
     padding: 50px;
@@ -121,7 +123,7 @@ nav .menu-img {
 }
 
 nav .logo {
-    width: 160px;
+    width: 40px;
     cursor: pointer;
 
 }
@@ -278,3 +280,54 @@ p.tag {
   display: none;
 }
 
+/*This is styling specific for the results page.*/
+.pdf-results{
+    position: absolute;
+    max-width:fit-content;
+    min-width: 40%;
+    height:100%;
+}
+
+#temp-pdf-display{
+    position: absolute;
+    top:125px;
+    left:10%;
+    width: 40%;
+    height:80%;
+    background-color: white;
+}
+
+#number-display{
+    position: absolute;
+    top:125px;
+    left:65%;
+    width: 20%;
+    height:15%;
+    background-color: #3e2a48;
+}
+
+#number{
+    position: absolute;
+    top:-15%;
+    left:18%;
+    font-size:50px;
+    color:white;
+}
+
+#out-of{
+    position: absolute;
+    top:-15%;
+    left:47%;
+    font-size:50px;
+    color:white;
+}
+
+#description-display{
+    position: absolute;
+    top:325px;
+    left:65%;
+    width: 20%;
+    height:55%;
+    background-color: #3e2a48;
+    color:white;
+}
