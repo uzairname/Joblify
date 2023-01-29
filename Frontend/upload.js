@@ -27,4 +27,13 @@ function displayPDF() {
     var pdfUrl = URL.createObjectURL(pdfFile);
     var pdfDisplay = document.getElementById("pdf-display");
     pdfDisplay.innerHTML = "<embed src='" + pdfUrl + "' width='100%' height='600px'/>";
+
+    console.log("pdfFile: " + pdfFile);
+
+    fetch('http://127.0.0.1:5000/upload-file', {
+        method: 'POST',
+        body: pdfFile
+    }).then(r => r.json())
+
 }
+
