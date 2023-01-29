@@ -44,7 +44,7 @@ nav .menu-img {
 }
 
 nav .logo {
-  width: 120px;
+  width: 40px;
   cursor: pointer;
 
 }
@@ -68,8 +68,8 @@ nav ul li a{
 
 button{
   background: #efefef;
-  height: 30px;
-  width: 60px;
+  height: 40px;
+  width: 400px;
   border-radius: 20px;
   border: 0;
   outline: 0;
@@ -116,8 +116,8 @@ button span {
 
 #logo{
   position:relative;
-  right: 50%;
-  top: 0.1%;
+  right: 20%;
+  top: 80px;
   margin: auto;
   width: 60px;
   padding: 20px;
@@ -125,14 +125,14 @@ button span {
 
 .description{
   position:absolute;
-  right: 45%;
-  top: -10%;
-  background-image: url("assets/resume_paper.png");
+  right: 1180px;
+  top: 145px;
+  background-image: url("assets/resume_paper.jpg");
   background-repeat: no-repeat;
-  background-size: 850px 750px;
+  background-size: 558px 700px;
   color:black;
-  width:850px;
-  height: 672px;
+  width:  558px;
+  height: 700px;
   z-index: 2;
 }
 
@@ -146,7 +146,7 @@ button span {
   width: 25%;
   position:absolute;
   left: 55%;
-  top: 20px;
+  top: 150px;
   z-index: 1;
 }
 .name img{
@@ -157,9 +157,23 @@ button span {
 }
 .name h3{
   position:absolute;
-  top:225px;
-  left:29%;
-  color:black;
-  font-family:serif;
-  
+  top:120px;
+  left:12%;
+  color:white;
+  font-size: 80px
+}
+
+.sn-up {
+  position: absolute;
+  top:700px;
+  left:1125px;
+}
+
+.sn-up-btn{
+  font-size: medium;
+  letter-spacing: 4px;
+}
+button:hover{
+  background: #EB46B4;
+  color: white;
 }
