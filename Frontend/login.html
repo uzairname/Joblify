@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Transcript Editor</title>
-    <link rel="stylesheet" href="styles-signup.css">
-
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Transcript Editor</title>
+        <link rel="stylesheet" href="styles-signup.css">
+    </head>
     <body>
         <div class="hero">
             <nav>
@@ -33,13 +35,16 @@
                     <form action="action_page.php" method="post">                      
                         <div class="sign-in-container">
                           <label for="uname"><b>Username</b></label>
-                          <input type="text" placeholder="Enter Username" name="uname" required>
+                          <input type="text" placeholder="Enter Username" name="uname" >
                       
                           <label for="psw"><b>Password</b></label>
-                          <input type="password" placeholder="Enter Password" name="psw" required>
-                      
-                          <a href="employer-home"><button type="submit" class="sign-in-button">Login as Employee</button></a>
-                          <a href="employee-home"></a><button type="submit" class="sign-in-button">Login as Employer</button></a>
+                          <input type="password" placeholder="Enter Password" name="psw" >
+                            
+                          
+                          <a href="upload.html"><button type="submit"  class="sign-in-button">Login as Employee</button></a>
+                          
+                          <a href="upload.html"> <button type="submit" class="sign-in-button">Login as Employer</button></a>
+                          
                           <label>
                             <input type="checkbox" checked="checked" name="remember"> Remember me
                           </label>
